@@ -79,8 +79,7 @@ export default function HeroSection() {
             className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto"
           >
             <motion.a
-              href="/downloads/finzz_v1.0.0.apk"
-              download
+              href="https://github.com/aryanseth9795/Finzz-Frontend/releases/download/App/finzz_v1.0.0.apk"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="group flex items-center justify-center gap-3 bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all shadow-xl shadow-blue-600/30"

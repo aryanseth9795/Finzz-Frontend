@@ -37,8 +37,7 @@ export default function CtaSection() {
           className="flex flex-col sm:flex-row justify-center gap-4"
         >
           <motion.a
-            href="/downloads/finzz-app.apk"
-            download="finzz-app.apk"
+            href="https://github.com/aryanseth9795/Finzz-Frontend/releases/download/App/finzz_v1.0.0.apk"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="group flex flex-col items-center justify-center bg-slate-900 hover:bg-slate-800 text-white px-8 py-4 rounded-3xl font-medium transition-colors shadow-2xl shadow-slate-900/20"
