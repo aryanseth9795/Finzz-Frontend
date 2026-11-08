@@ -1,5 +1,6 @@
 "use client";
 
+import { DOWNLOAD_URL } from "../lib/site";
 import { motion } from "framer-motion";
 import { Download, Menu, X } from "lucide-react";
 import { useState } from "react";
@@ -59,7 +60,7 @@ export default function Navbar() {
           </button>
 
           <motion.a
-            href="https://github.com/aryanseth9795/Finzz-Frontend/releases/download/App/finzz_v1.0.0.apk"
+            href={DOWNLOAD_URL}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-6 py-2.5 rounded-full font-medium transition-colors shadow-lg shadow-slate-900/20"
@@ -105,7 +106,7 @@ export default function Navbar() {
           </button>
 
           <a
-            href="https://github.com/aryanseth9795/Finzz-Frontend/releases/download/App/finzz_v1.0.0.apk"
+            href={DOWNLOAD_URL}
             className="flex items-center justify-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-xl font-medium mt-4"
           >
             <Download size={20} />

@@ -1,6 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { SUPPORT_EMAIL } from "../lib/site";
 
 export default function Footer() {
   return (
@@ -19,13 +21,16 @@ export default function Footer() {
         </div>
         <p>© {new Date().getFullYear()} Finzz App. All rights reserved.</p>
         <div className="mt-6 flex justify-center gap-6 text-sm">
-          <a href="#" className="hover:text-slate-900 transition-colors">
+          <Link href="/privacy" className="hover:text-slate-900 transition-colors">
             Privacy Policy
-          </a>
-          <a href="#" className="hover:text-slate-900 transition-colors">
+          </Link>
+          <Link href="/terms" className="hover:text-slate-900 transition-colors">
             Terms of Service
-          </a>
-          <a href="#" className="hover:text-slate-900 transition-colors">
+          </Link>
+          <Link href="/delete-account" className="hover:text-slate-900 transition-colors">
+            Delete Account
+          </Link>
+          <a href={`mailto:${SUPPORT_EMAIL}`} className="hover:text-slate-900 transition-colors">
             Contact
           </a>
         </div>
