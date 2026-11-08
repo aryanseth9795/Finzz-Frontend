@@ -90,12 +90,25 @@ export default function PrivacyPage() {
         {
           heading: "Retention",
           body: (
+            <>
             <ul>
               <li>Kept while your account exists.</li>
-              <li>Deleted when you delete your account.</li>
+              <li>
+                Deleted when you delete your account. Deletion removes your
+                profile, login and photo, personal expenses, categories and
+                reports, 1:1 chats and their transactions, notes you own, pool
+                entries you added, friend list and requests, notifications,
+                push registrations and daily usage records.
+              </li>
               <li>Push delivery records are kept 3 days.</li>
               <li>Usage counts are kept 180 days.</li>
             </ul>
+            <p>
+              Residual copies may remain in encrypted backups and server logs
+              for a limited time until they are overwritten in the normal
+              cycle.
+            </p>
+            </>
           ),
         },
         {

@@ -26,17 +26,25 @@ export default function DeleteAccountPage() {
           heading: "What is deleted",
           body: (
             <ul>
-              <li>Your profile and login.</li>
-              <li>Personal expenses, categories and reports.</li>
-              <li>Your 1:1 chats and their transactions, for both people.</li>
+              <li>Your profile, login and profile photo.</li>
+              <li>Your personal expenses, categories and reports.</li>
+              <li>Your 1:1 chats and their transactions (for both people).</li>
               <li>Notes you own.</li>
               <li>Pool entries you added.</li>
+              <li>
+                Your friend list and friend requests (you are removed from
+                friends&apos; lists).
+              </li>
+              <li>Your notifications.</li>
+              <li>Push notification registrations.</li>
+              <li>Your daily usage records.</li>
             </ul>
           ),
         },
         {
           heading: "What stays",
           body: (
+            <>
             <ul>
               <li>
                 The Password Vault on your phone. It never left your device;
@@ -45,6 +53,12 @@ export default function DeleteAccountPage() {
               <li>Notes friends shared with you stay with their owners.</li>
               <li>Pools keep their other members.</li>
             </ul>
+            <p>
+              Residual copies may remain in encrypted backups and server logs
+              for a limited time until they are overwritten in the normal
+              cycle.
+            </p>
+            </>
           ),
         },
         {
