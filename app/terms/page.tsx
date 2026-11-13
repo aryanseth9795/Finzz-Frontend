@@ -22,6 +22,15 @@ export default function TermsPage() {
           ),
         },
         {
+          heading: "Who can use Finzz",
+          body: (
+            <p>
+              Finzz is for people aged 18 and over. If you are under 18, please
+              do not create an account.
+            </p>
+          ),
+        },
+        {
           heading: "Your account",
           body: (
             <p>

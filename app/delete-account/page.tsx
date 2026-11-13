@@ -51,7 +51,10 @@ export default function DeleteAccountPage() {
                 uninstall the app to remove it.
               </li>
               <li>Notes friends shared with you stay with their owners.</li>
-              <li>Pools keep their other members.</li>
+              <li>
+                Pools keep their other members, the pool itself (its name,
+                description and rules) and entries other members added.
+              </li>
             </ul>
             <p>
               Residual copies may remain in encrypted backups and server logs
@@ -77,7 +80,9 @@ export default function DeleteAccountPage() {
               the email address on your account, with the subject
               &ldquo;Delete my Finzz account&rdquo; and your registered phone
               number. We verify it&apos;s you and delete the account within 30
-              days, usually much sooner.
+              days, usually much sooner. If you no longer have access to that
+              email, include your registered phone number and your name and we
+              will contact you to verify.
             </p>
           ),
         },
