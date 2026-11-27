@@ -17,8 +17,8 @@ export function LogoMark({
       width={size}
       height={size}
       className={className}
-      role="img"
-      aria-label="Finzz"
+      aria-hidden="true"
+      focusable="false"
     >
       <defs>
         <linearGradient id={g} x1="0" y1="0" x2="1" y2="1">

@@ -24,8 +24,7 @@ export function PlayButton({
     return (
       <a
         href={PLAY_STORE_URL}
-        aria-label="Get Finzz on Google Play"
-        className={`inline-block ${className}`}
+        className={`inline-block rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint ${className}`}
       >
         <Image
           src={PLAY_BADGE_SRC}
@@ -43,7 +42,7 @@ export function PlayButton({
   return (
     <a
       href={PLAY_STORE_URL}
-      aria-label="Get Finzz on Google Play"
+      aria-label={size === "sm" ? "Get the app on Google Play" : undefined}
       className={`inline-flex items-center justify-center rounded-xl font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint ${SIZES[size]} ${colours} ${className}`}
     >
       <Download size={ICON[size]} aria-hidden="true" />
