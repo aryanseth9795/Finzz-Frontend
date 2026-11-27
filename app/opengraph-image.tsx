@@ -36,7 +36,13 @@ export default async function Image() {
       >
         <div style={{ display: "flex", alignItems: "center" }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={logo} width={150} height={150} alt="" />
+          <img
+            src={logo}
+            width={150}
+            height={150}
+            alt=""
+            style={{ borderRadius: 34 }}
+          />
           <div
             style={{
               display: "flex",
