@@ -1,6 +1,6 @@
-import type { Metadata } from "next";
 import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
+import { siteMetadata } from "@/app/lib/metadata";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -12,11 +12,7 @@ const outfit = Outfit({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Finzz - Your Ultimate Finance App",
-  description:
-    "Track expenses, manage pools, and settle up with friends easily through Finzz.",
-};
+export const metadata = siteMetadata;
 
 export default function RootLayout({
   children,
@@ -24,10 +20,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body
-        className={`${inter.variable} ${outfit.variable} font-sans antialiased bg-slate-50 text-slate-900 selection:bg-blue-500/30`}
-      >
+    <html lang="en" data-scroll-behavior="smooth" className={`${inter.variable} ${outfit.variable}`}>
+      <body className="bg-white text-ink font-sans antialiased">
         {children}
       </body>
     </html>

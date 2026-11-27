@@ -1,40 +1,56 @@
-"use client";
-
-import { motion } from "framer-motion";
 import Link from "next/link";
-import { SUPPORT_EMAIL } from "../lib/site";
+import { LogoMark } from "@/app/components/ui/LogoMark";
+import { DEVELOPER, SUPPORT_EMAIL } from "@/app/lib/site";
 
-export default function Footer() {
+const LINKS = [
+  { href: "/privacy", label: "Privacy" },
+  { href: "/terms", label: "Terms" },
+  { href: "/delete-account", label: "Delete account" },
+  { href: `mailto:${SUPPORT_EMAIL}`, label: "Contact" },
+] as const;
+
+export function Footer() {
+  const year = new Date().getFullYear();
   return (
-    <footer className="bg-slate-50 border-t border-slate-200 py-12 text-center text-slate-500 font-medium">
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-      >
-        <div className="flex justify-center items-center mb-6">
-          <img
-            src="/finzz-logo-transparent.png"
-            alt="Finzz Logo"
-            className="h-10 w-auto object-contain drop-shadow-sm opacity-90"
-          />
+    <footer className="border-t border-line bg-white">
+      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-4 py-10 sm:px-6 md:flex-row md:items-start md:justify-between">
+        <div>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2.5 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-via"
+          >
+            <span aria-hidden="true" className="flex">
+              <LogoMark size={32} />
+            </span>
+            <span className="font-display text-xl font-semibold tracking-tight text-ink">
+              Finzz
+            </span>
+          </Link>
+          <p className="mt-3 text-sm text-body">Developed by {DEVELOPER}</p>
         </div>
-        <p>© {new Date().getFullYear()} Finzz App. All rights reserved.</p>
-        <div className="mt-6 flex justify-center gap-6 text-sm">
-          <Link href="/privacy" className="hover:text-slate-900 transition-colors">
-            Privacy Policy
-          </Link>
-          <Link href="/terms" className="hover:text-slate-900 transition-colors">
-            Terms of Service
-          </Link>
-          <Link href="/delete-account" className="hover:text-slate-900 transition-colors">
-            Delete Account
-          </Link>
-          <a href={`mailto:${SUPPORT_EMAIL}`} className="hover:text-slate-900 transition-colors">
-            Contact
-          </a>
-        </div>
-      </motion.div>
+
+        <nav aria-label="Footer">
+          <ul className="flex flex-wrap gap-x-6 gap-y-3">
+            {LINKS.map((l) => (
+              <li key={l.label}>
+                <a
+                  href={l.href}
+                  className="rounded-md text-sm font-medium text-body transition-colors hover:text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-via"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+      <div className="border-t border-line">
+        <p className="mx-auto max-w-6xl px-4 py-5 text-xs text-muted sm:px-6">
+          © {year} Finzz. All rights reserved.
+        </p>
+      </div>
     </footer>
   );
 }
+
+export default Footer;

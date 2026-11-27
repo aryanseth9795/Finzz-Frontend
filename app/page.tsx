@@ -1,23 +1,32 @@
-import Navbar from "./components/Navbar";
-import HeroSection from "./components/HeroSection";
-import FeaturesSection from "./components/FeaturesSection";
-import AppOverviewSection from "./components/AppOverviewSection";
-import CtaSection from "./components/CtaSection";
-import Footer from "./components/Footer";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
+import Hero from "./components/sections/Hero";
+import { HowItWorks } from "./components/sections/HowItWorks";
+import { Features } from "./components/sections/Features";
+import { Videos } from "./components/sections/Videos";
+import { Privacy } from "./components/sections/Privacy";
+import { Faq } from "./components/sections/Faq";
+import { Download } from "./components/sections/Download";
+import AppJsonLd from "./components/ui/AppJsonLd";
+import { homeMetadata } from "./lib/metadata";
+
+export const metadata = homeMetadata;
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
-
+    <>
+      <AppJsonLd />
+      <Navbar variant="overlay" />
       <main>
-        <HeroSection />
-        <FeaturesSection />
-        <AppOverviewSection />
-        <CtaSection />
+        <Hero />
+        <HowItWorks />
+        <Features />
+        <Videos />
+        <Privacy />
+        <Faq />
+        <Download />
       </main>
-
       <Footer />
-    </div>
+    </>
   );
 }
