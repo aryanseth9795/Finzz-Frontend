@@ -33,7 +33,7 @@ In a git worktree, give the worktree its own `npm ci`. A junction to another che
 
 - **One download target:** the Google Play listing (`PLAY_STORE_URL`). `/download` is a 307 to it; use `https://<site>/download` in captions and posters.
 - **No unproven claims:** no ratings, user counts, "best" or "#1". `tests/content.test.ts` fails the build's tests if any appear.
-- **The App depends on these URLs, so keep them:** `/privacy`, `/terms`, `/delete-account`, and every file in `public/videos/` under its exact name. The videos stream with range requests and `Cache-Control: public, max-age=86400`.
+- **The App depends on these URLs, so keep them:** `/privacy`, `/terms`, `/delete-account`, and every file in `public/videos/` under its exact name. The videos stream with range requests and `Cache-Control: public, max-age=86400`. On Netlify that header comes from `netlify.toml`, because Netlify serves `public/` files from its CDN and ignores `next.config.ts` `headers()` for them. Keep both rules in step.
 - Videos use `preload="none"`, so nothing downloads until someone taps play.
 - Content never relies on JavaScript to become visible (`Reveal` only hides things after the page loads).
 

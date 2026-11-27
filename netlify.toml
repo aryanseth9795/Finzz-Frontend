@@ -1,0 +1,9 @@
+# Netlify serves files in public/ straight from its CDN and ignores the
+# headers() rule in next.config.ts for them. The App streams these videos
+# (and their posters) by exact name, so let phones cache them for a day.
+# Build settings stay in the Netlify UI; this file only adds headers.
+
+[[headers]]
+  for = "/videos/*"
+  [headers.values]
+    Cache-Control = "public, max-age=86400"
