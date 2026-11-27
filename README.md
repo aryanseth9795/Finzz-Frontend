@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Finzz website
 
-## Getting Started
+The public site for the Finzz Android app: one landing page plus the privacy, terms and delete-account pages. Next.js 16 (app router, all static), React 19, Tailwind CSS 4, lucide-react. Hosted on Netlify, which deploys `main`.
 
-First, run the development server:
+## Run it
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```powershell
+npm ci
+npm run dev        # http://localhost:3000
+npm run lint
+npm test           # unit tests: data, metadata, redirects, assets, claims guard
+npm run build
+npm start          # serve the production build on :3000
+npm run smoke      # checks a running site; set SMOKE_URL for another host
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+In a git worktree, give the worktree its own `npm ci`. A junction to another checkout's `node_modules` breaks Turbopack.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Where things live
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| What | Where |
+|---|---|
+| Domain, Play link, support email, badge switch | `app/lib/site.ts` |
+| All page copy: features, videos, privacy cards, FAQ | `app/lib/content.ts` |
+| Page order | `app/page.tsx` |
+| Sections | `app/components/sections/*` |
+| Shared parts (logo, Play button, phone frame, reveal, headings) | `app/components/ui/*` |
+| Colours, fonts, animations | `app/globals.css` (`@theme` tokens) |
+| Title, description, share card | `app/lib/metadata.ts`, `app/opengraph-image.tsx` |
+| `/download` → Play, video cache header | `next.config.ts` |
 
-## Learn More
+## Rules this site keeps
 
-To learn more about Next.js, take a look at the following resources:
+- **One download target:** the Google Play listing (`PLAY_STORE_URL`). `/download` is a 307 to it; use `https://<site>/download` in captions and posters.
+- **No unproven claims:** no ratings, user counts, "best" or "#1". `tests/content.test.ts` fails the build's tests if any appear.
+- **The App depends on these URLs, so keep them:** `/privacy`, `/terms`, `/delete-account`, and every file in `public/videos/` under its exact name. The videos stream with range requests and `Cache-Control: public, max-age=86400`.
+- Videos use `preload="none"`, so nothing downloads until someone taps play.
+- Content never relies on JavaScript to become visible (`Reveal` only hides things after the page loads).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## To do when things change
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **New domain live:** once `https://finzz.aryanseth.in` serves this site over HTTPS, set `SITE_URL` in `app/lib/site.ts` to it and redeploy. aryantechie.in expires in December 2026.
+- **Official Google Play badge:** put Google's badge file in `public/` and set `PLAY_BADGE_SRC` in `app/lib/site.ts` to its path. Until then the site uses its own "Get Finzz on Google Play" button.
 
-## Deploy on Vercel
+## Assets
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Screenshots:** `public/screens/*.png` are phone-only crops of the Play screenshots in the App repo (`store/screenshots/out`), all 716×1590.
+  - `01-chats`, `02-ledger` and `04-expenses` (two-line caption): `crop=716:1590:182:260`.
+  - `03-report` and `05`–`08` (one-line caption): `crop=752:1670:164:180,scale=716:1590`.
+- **Video posters:** `public/videos/posters/*.jpg`, from the App's `assets/onboarding/video-*.jpg`. The videos come from the promo kit (`Agent/promo`).
+- **QR code:** `public/qr-play.svg` encodes the Play URL. To regenerate it, run `npx qrcode@1.5.4 -t svg -e M -m 1 -o qr-play.svg "<Play URL>"` (not a dependency).
+- **Icons:** from logo A (`public/logo-a.svg`). `app/favicon.ico` holds RGBA PNGs at 16, 32 and 48 px, because Next can't decode ffmpeg's ICO output.
