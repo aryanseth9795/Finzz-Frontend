@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "vitest run",
+    "smoke": "vitest run --config vitest.e2e.config.ts"
   },
   "dependencies": {
     "framer-motion": "^12.34.3",
@@ -20,9 +22,10 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^10.0.1",
-    "eslint-config-next": "^0.2.4",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.1.6",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.12"
   }
 }
