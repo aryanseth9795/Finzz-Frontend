@@ -47,6 +47,6 @@ In a git worktree, give the worktree its own `npm ci`. A junction to another che
 - **Screenshots:** `public/screens/*.png` are phone-only crops of the Play screenshots in the App repo (`store/screenshots/out`), all 716×1590.
   - `01-chats`, `02-ledger` and `04-expenses` (two-line caption): `crop=716:1590:182:260`.
   - `03-report` and `05`–`08` (one-line caption): `crop=752:1670:164:180,scale=716:1590`.
-- **Video posters:** `public/videos/posters/*.jpg`, from the App's `assets/onboarding/video-*.jpg`. The videos come from the promo kit (`Agent/promo`).
-- **QR code:** `public/qr-play.svg` encodes the Play URL. To regenerate it, run `npx qrcode@1.5.4 -t svg -e M -m 1 -o qr-play.svg "<Play URL>"` (not a dependency).
+- **Video posters:** `public/videos/posters/*.jpg`, from the App's `assets/onboarding/video-*.jpg`, scaled to 360×640. The page only sets them when the videos section is near the screen, so they never compete with the hero image. The videos come from the promo kit (`Agent/promo`).
+- **QR code:** `public/qr-play.svg` encodes the Play URL. To regenerate it, run `npx qrcode@1.5.4 -t svg -o qr-play.svg "<Play URL>"` (not a dependency).
 - **Icons:** from logo A (`public/logo-a.svg`). `app/favicon.ico` holds RGBA PNGs at 16, 32 and 48 px, because Next can't decode ffmpeg's ICO output.

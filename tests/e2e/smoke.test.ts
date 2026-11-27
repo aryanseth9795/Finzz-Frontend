@@ -99,7 +99,10 @@ describe("pages the App and Play Console link to", () => {
   it.each(["/privacy", "/terms", "/delete-account"])("%s responds 200 with the support address", async (path) => {
     const res = await fetch(`${BASE}${path}`);
     expect(res.status).toBe(200);
-    expect(await res.text()).toContain(SUPPORT_EMAIL);
+    const html = await res.text();
+    expect(html).toContain(SUPPORT_EMAIL);
+    expect(html).not.toContain('rel="canonical"');
+    expect(html).not.toContain("application/ld+json");
   });
 
   it("/download redirects (307) to the Play listing", async () => {

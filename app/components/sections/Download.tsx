@@ -23,6 +23,7 @@ export function Download() {
               src="/qr-play.svg"
               width={128}
               height={128}
+              loading="lazy"
               alt="QR code: Finzz on Google Play"
             />
             <p className="text-sm font-medium text-body">Scan on your phone</p>

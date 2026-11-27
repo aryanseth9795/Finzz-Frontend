@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
 import { LogoMark } from "@/app/components/ui/LogoMark";
@@ -16,6 +16,7 @@ const LINKS = [
 export function Navbar({ variant }: { variant: "overlay" | "solid" }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -27,7 +28,10 @@ export function Navbar({ variant }: { variant: "overlay" | "solid" }) {
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") {
+        setOpen(false);
+        toggleRef.current?.focus();
+      }
     };
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -89,6 +93,7 @@ export function Navbar({ variant }: { variant: "overlay" | "solid" }) {
         <div className="flex items-center gap-2">
           <PlayButton size="sm" tone={solid ? "dark" : "light"} />
           <button
+            ref={toggleRef}
             type="button"
             className={`inline-flex h-10 w-10 items-center justify-center rounded-lg transition-colors md:hidden ${
               solid

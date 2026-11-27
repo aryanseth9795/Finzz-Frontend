@@ -24,6 +24,7 @@ export function Phone({
         height={1590}
         sizes={sizes}
         priority={priority}
+        fetchPriority={priority ? "high" : undefined}
         className="block h-auto w-full"
       />
     </div>

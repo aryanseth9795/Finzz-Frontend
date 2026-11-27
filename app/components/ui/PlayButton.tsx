@@ -20,11 +20,15 @@ export function PlayButton({
   tone?: "light" | "dark";
   className?: string;
 }) {
+  const ring =
+    tone === "light"
+      ? "focus-visible:outline-white"
+      : "focus-visible:outline-brand-via";
   if (PLAY_BADGE_SRC) {
     return (
       <a
         href={PLAY_STORE_URL}
-        className={`inline-block rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint ${className}`}
+        className={`inline-block rounded-lg focus-visible:outline-2 focus-visible:outline-offset-2 ${ring} ${className}`}
       >
         <Image
           src={PLAY_BADGE_SRC}
@@ -43,7 +47,7 @@ export function PlayButton({
     <a
       href={PLAY_STORE_URL}
       aria-label={size === "sm" ? "Get the app on Google Play" : undefined}
-      className={`inline-flex items-center justify-center rounded-xl font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint ${SIZES[size]} ${colours} ${className}`}
+      className={`inline-flex items-center justify-center rounded-xl font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 ${ring} ${SIZES[size]} ${colours} ${className}`}
     >
       <Download size={ICON[size]} aria-hidden="true" />
       {size === "sm" ? "Get the app" : "Get Finzz on Google Play"}

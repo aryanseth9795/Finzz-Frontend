@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, type SyntheticEvent } from "react";
+import { useEffect, useRef, useState, type SyntheticEvent } from "react";
 import { FEATURED_VIDEO_ID, VIDEOS, type Video } from "@/app/lib/content";
 import { Reveal } from "@/app/components/ui/Reveal";
 import { SectionHeading } from "@/app/components/ui/SectionHeading";
@@ -11,7 +11,15 @@ function formatLength(seconds: number): string {
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
-function VideoCard({ video, featured }: { video: Video; featured?: boolean }) {
+function VideoCard({
+  video,
+  featured,
+  showPoster,
+}: {
+  video: Video;
+  featured?: boolean;
+  showPoster: boolean;
+}) {
   return (
     <figure className="min-w-0">
       <div className="aspect-[9/16] overflow-hidden rounded-3xl bg-night shadow-lg ring-1 ring-line">
@@ -21,7 +29,8 @@ function VideoCard({ video, featured }: { video: Video; featured?: boolean }) {
           controls
           playsInline
           preload="none"
-          poster={video.poster}
+          aria-label={video.title}
+          poster={showPoster ? video.poster : undefined}
           src={`/videos/${video.file}`}
         />
       </div>
@@ -44,6 +53,28 @@ function VideoCard({ video, featured }: { video: Video; featured?: boolean }) {
 
 export function Videos() {
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const sectionRef = useRef<HTMLElement | null>(null);
+  // Posters load only near the viewport so they never compete with the hero LCP image.
+  const [showPoster, setShowPoster] = useState(false);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (typeof IntersectionObserver === "undefined" || !el) {
+      setShowPoster(true);
+      return;
+    }
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          setShowPoster(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin: "800px 0px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   // Play does not bubble in the DOM, but React's capture handler sees it.
   const onPlayCapture = (e: SyntheticEvent<HTMLDivElement>) => {
@@ -57,7 +88,7 @@ export function Videos() {
   const others = VIDEOS.filter((v) => v.id !== featured.id);
 
   return (
-    <section id="videos" className="py-20 md:py-28">
+    <section ref={sectionRef} id="videos" className="py-20 md:py-28">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal>
           <SectionHeading
@@ -72,11 +103,11 @@ export function Videos() {
             className="mt-10 grid gap-8 lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:items-start lg:gap-10"
           >
             <div className="mx-auto w-full max-w-xs lg:mx-0 lg:max-w-none">
-              <VideoCard video={featured} featured />
+              <VideoCard video={featured} featured showPoster={showPoster} />
             </div>
             <div className="grid grid-cols-2 gap-x-4 gap-y-6 md:grid-cols-3 md:gap-x-6">
               {others.map((v) => (
-                <VideoCard key={v.id} video={v} />
+                <VideoCard key={v.id} video={v} showPoster={showPoster} />
               ))}
             </div>
           </div>

@@ -6,9 +6,9 @@ import { SectionHeading } from "@/app/components/ui/SectionHeading";
 const CHIP =
   "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-bold";
 
-const PENDING = <span className={`${CHIP} bg-[#FEF3C7] text-[#92400E]`}>Pending</span>;
-const VERIFY = <span className={`${CHIP} bg-[#D1FAE5] text-[#065F46]`}>Verify</span>;
-const REJECT = <span className={`${CHIP} bg-[#FEE2E2] text-[#991B1B]`}>Reject</span>;
+const PENDING = <span className={`${CHIP} bg-chip-pending-bg text-chip-pending-fg`}>Pending</span>;
+const VERIFY = <span className={`${CHIP} bg-chip-verified-bg text-chip-verified-fg`}>Verify</span>;
+const REJECT = <span className={`${CHIP} bg-chip-rejected-bg text-chip-rejected-fg`}>Reject</span>;
 
 const STEPS: { title: string; body: ReactNode }[] = [
   {
@@ -68,7 +68,7 @@ export function HowItWorks() {
           <Reveal className="mx-auto w-full max-w-[260px] sm:max-w-[300px]">
             <Phone
               screen="ledger"
-              sizes="(min-width: 768px) 300px, 260px"
+              sizes="(min-width: 640px) 300px, 260px"
             />
           </Reveal>
         </div>

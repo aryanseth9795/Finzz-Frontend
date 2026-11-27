@@ -12,6 +12,12 @@
   --color-tint: #f8faff;
   --color-line: #e7e9f3;
   --color-night: #0f172a;
+  --color-chip-pending-bg: #fef3c7;
+  --color-chip-pending-fg: #92400e;
+  --color-chip-verified-bg: #d1fae5;
+  --color-chip-verified-fg: #065f46;
+  --color-chip-rejected-bg: #fee2e2;
+  --color-chip-rejected-fg: #991b1b;
 }
 
 /* inline: the next/font variables are set on <html>, so resolve them there */
